@@ -1,1278 +1,541 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ritendra Kumar G — AI Engineer &amp; Product Builder</title>
-<meta name="description" content="AI Engineer and Product Builder. I design and build production-oriented AI applications, agentic systems, RAG platforms, and customer-facing products.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ritendrakumar Guntreddi — AI Engineer & Product Builder</title>
+<meta name="description" content="Ritendrakumar Guntreddi is an AI Engineer and product builder working on Generative AI, LLM agents, RAG, MCP, backend systems and B2B SaaS products.">
+<meta name="author" content="Ritendrakumar Guntreddi">
+<meta property="og:title" content="Ritendrakumar Guntreddi — AI Engineer & Product Builder">
+<meta property="og:description" content="I build AI systems, software products, and infrastructure for real-world workflows.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
-/* ==========================================================================
-   TOKENS
-   ========================================================================== */
 :root {
-  /* Anthropic brand palette: cream canvas, slate ink, clay accent */
-  --bg: #faf9f5;
-  --surface: #ffffff;
-  --surface-2: #f0efea;
-  --border: #e3e0d6;
-  --border-strong: #d3cfc0;
-  --text: #141413;
-  --text-muted: #6b6a62;
-  --text-faint: #726f60;
+  /* Palette from DESIGN.md */
+  --slate-dark: #141413;
+  --ivory-medium: #f0eee6;
+  --ivory-light: #faf9f5;
+  --cloud-medium: #b0aea5;
+  --cloud-dark: #87867f;
+  --stone: #cccbc8;
+  --slate-medium: #3d3d3a;
+  --oat: #e3dacc;
+  --manilla: #f5e3c7;
+  --clay: #d97757;
+  --clay-deep: #c6613f;
+
+  --serif: 'Anthropic Serif', 'Source Serif 4', ui-serif, Georgia, serif;
+  --sans: 'Anthropic Sans', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --max: 1120px;
+  --gut: clamp(18px, 4vw, 36px);
+  --gap: clamp(48px, 7vw, 72px);
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+/* Dark (default): warm slate canvas, ivory text */
+:root, :root[data-theme="dark"] {
+  --bg: #141413;
+  --surface: #1d1d1b;
+  --surface-2: #262624;
+  --line: #3d3d3a;
+  --text: #faf9f5;
+  --muted: #b0aea5;
+  --faint: #87867f;
   --accent: #d97757;
-  --accent-strong: #a8512f;
-  --accent-dim: rgba(217, 119, 87, 0.12);
-  --accent-line: rgba(217, 119, 87, 0.4);
-  --sky: #6a9bcc;
-  --cactus: #788c5d;
-
-  --font-display: 'Source Serif 4', Georgia, serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-
-  --max-w: 1120px;
-  --radius-s: 6px;
-  --radius-m: 10px;
-  --nav-h: 64px;
+  --btn-bg: #faf9f5; --btn-fg: #141413; --btn-hover: #e3dacc;
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --bg: #f0eee6;
+  --surface: #faf9f5;
+  --surface-2: #e3dacc;
+  --line: #cccbc8;
+  --text: #141413;
+  --muted: #3d3d3a;
+  --faint: #87867f;
+  --accent: #c6613f;
+  --btn-bg: #141413; --btn-fg: #faf9f5; --btn-hover: #3d3d3a;
+  color-scheme: light;
 }
 
-/* ==========================================================================
-   RESET
-   ========================================================================== */
-*, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 12px); }
+*, *::before, *::after { box-sizing: inherit; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(60px + env(safe-area-inset-top, 0px)); }
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.55;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: var(--serif); font-size: 17px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
 }
-h1, h2, h3, p, ul, ol, figure { margin: 0; }
-ul, ol { padding: 0; list-style: none; }
-a { color: inherit; text-decoration: none; }
-button { font-family: inherit; cursor: pointer; }
-img { max-width: 100%; display: block; }
+p, h1, h2, h3, h4, ul { margin: 0; padding: 0; }
+h1, h2, h3, h4 { font-weight: 400; }
+ul { list-style: none; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 3px;
+.skip { position: absolute; left: 12px; top: -80px; background: var(--ivory-light); color: var(--slate-dark); font: 14px var(--sans); padding: 8px 14px; z-index: 100; }
+.skip:focus { top: calc(8px + env(safe-area-inset-top, 0px)); }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gut); }
+.ul { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.ul:hover { color: var(--accent); }
+
+/* Nav */
+.nav { position: sticky; top: 0; z-index: 50; background: var(--bg); padding-top: env(safe-area-inset-top, 0px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+.nav.scrolled { border-bottom-color: var(--line); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 12px; }
+.logo { font: 700 12px var(--sans); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; }
+.nav-right { display: flex; align-items: center; gap: 4px; }
+.links { display: flex; align-items: center; gap: 2px; }
+.links a { font: 500 13px var(--sans); text-decoration: none; color: var(--muted); padding: 8px 10px; border-radius: 8px; transition: color .15s, background .15s; }
+.links a:hover { color: var(--text); }
+.links a.active { color: var(--text); background: var(--surface-2); }
+.icon-btn { background: none; border: 1px solid var(--line); color: var(--text); width: 36px; height: 36px; border-radius: 10px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; }
+.icon-btn:hover { background: var(--surface); }
+#menuBtn { display: none; }
+#menuBtn i, #menuBtn i::before, #menuBtn i::after { display: block; width: 15px; height: 1.5px; background: currentColor; position: relative; content: ''; transition: transform .2s, background .2s; }
+#menuBtn i::before { position: absolute; top: -5px; } #menuBtn i::after { position: absolute; top: 5px; }
+#menuBtn[aria-expanded="true"] i { background: transparent; }
+#menuBtn[aria-expanded="true"] i::before { transform: translateY(5px) rotate(45deg); }
+#menuBtn[aria-expanded="true"] i::after { transform: translateY(-5px) rotate(-45deg); }
+@media (max-width: 780px) {
+  #menuBtn { display: inline-flex; }
+  .links { position: absolute; left: 0; right: 0; top: 100%; background: var(--bg); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; padding: 6px var(--gut) 14px; display: none; }
+  .links.open { display: flex; }
+  .links a { padding: 12px 4px; font-size: 15px; border-radius: 0; border-bottom: 1px solid var(--line); background: none !important; }
 }
 
+/* Buttons */
+.btn { display: inline-block; font: 500 14px var(--sans); text-decoration: none; padding: 10px 20px; border: 0; cursor: pointer; border-radius: 0 0 8px 8px; background: var(--btn-bg); color: var(--btn-fg); transition: background .15s; }
+.btn:hover { background: var(--btn-hover); }
+.btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--faint); border-radius: 10px; padding: 9px 18px; }
+.btn.ghost:hover { background: var(--surface); }
+.btn.clay { background: var(--clay); color: #fff; border-radius: 8px; }
+.btn.clay:hover { background: var(--clay-deep); }
+
+/* Sections */
+section { padding-top: var(--gap); }
+.label { font: 600 12px var(--sans); color: var(--accent); letter-spacing: -.01em; display: block; margin-bottom: 8px; }
+h2.h { font: 700 clamp(24px, 3.4vw, 34px)/1.15 var(--sans); letter-spacing: -.02em; max-width: 760px; }
+.head { margin-bottom: 24px; }
+
+/* Hero */
+.hero { padding-top: clamp(40px, 7vw, 72px); }
+.hero h1 { font: 700 clamp(36px, 6vw, 60px)/1.05 var(--sans); letter-spacing: -.03em; }
+.hero h1 em { font-family: var(--serif); font-style: normal; font-weight: 400; letter-spacing: 0; color: var(--manilla); }
+:root[data-theme="light"] .hero h1 em { color: var(--clay-deep); }
+.hero-row { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: end; }
+.hero p.lead { color: var(--muted); font-size: 18px; margin-bottom: 18px; max-width: 460px; }
+.cta { display: flex; gap: 10px; flex-wrap: wrap; }
+.facts { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 6px 24px; padding-top: 14px; border-top: 1px solid var(--line); font: 13px var(--sans); color: var(--muted); }
+.facts span::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: 1px; }
+@media (max-width: 800px) { .hero-row { grid-template-columns: 1fr; align-items: start; } }
+
+/* Cards */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+.card h3 { font: 600 16px/1.3 var(--sans); margin-bottom: 4px; letter-spacing: -.005em; }
+.card p { font-size: 15px; color: var(--muted); line-height: 1.45; }
+.g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.g2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (max-width: 860px) { .g3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px) { .g3, .g2 { grid-template-columns: 1fr; } }
+
+/* About */
+.about { display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: start; }
+.about p { color: var(--muted); }
+.about p + p { margin-top: 10px; }
+@media (max-width: 800px) { .about { grid-template-columns: 1fr; gap: 16px; } }
+.pillars { margin-top: 20px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li { font: 12px var(--sans); color: var(--muted); border: 1px solid var(--line); border-radius: 8px; padding: 3px 9px; }
+.stack { margin-top: 12px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+.stack h4 { font: 600 12px var(--sans); margin-bottom: 6px; color: var(--text); }
+.stack p { font: 12px/1.55 var(--sans); color: var(--muted); }
+@media (max-width: 860px) { .stack { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .stack { grid-template-columns: 1fr; } }
+
+/* Projects */
+.proj { display: flex; flex-direction: column; gap: 0; transition: border-color .2s, transform .2s; }
+.proj:hover { border-color: var(--faint); transform: translateY(-2px); }
+.meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; font: 12px var(--sans); color: var(--faint); margin-bottom: 10px; }
+.status { display: inline-flex; align-items: center; gap: 6px; color: var(--text); font-weight: 500; }
+.status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--dot, var(--faint)); }
+.status.live { --dot: #8fb98b; } .status.dep { --dot: var(--clay); } .status.oss { --dot: var(--cloud-medium); } .status.priv { --dot: var(--faint); }
+:root[data-theme="light"] .status.live { --dot: #5f8a5b; }
+.proj h3 { font-size: 18px; }
+.proj .d { margin: 4px 0 12px; }
+.proj .chips { margin-bottom: 14px; }
+.proj .go { margin-top: auto; font: 500 13px var(--sans); }
+.proj .go.mute { color: var(--faint); }
+
+/* 2Way + Lookartz */
+.two { display: grid; grid-template-columns: 1.6fr 1fr; gap: 12px; }
+@media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+.flow { display: flex; align-items: center; gap: 8px; margin: 14px 0 6px; flex-wrap: wrap; }
+.node { font: 500 12px var(--sans); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 7px 12px; }
+.node.core { background: var(--ivory-light); color: var(--slate-dark); border-color: var(--ivory-light); font-weight: 600; }
+.arr { color: var(--faint); font: 13px var(--sans); }
+.sdk { font: 12px var(--sans); color: var(--faint); }
+.tagline { font-size: 18px; color: var(--text); margin: 2px 0 6px; }
+
+/* Clients */
+.clients { display: flex; flex-wrap: wrap; gap: 8px; }
+.client { font: 500 13px var(--sans); text-decoration: none; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; display: inline-flex; gap: 6px; align-items: center; transition: border-color .15s; }
+a.client:hover { border-color: var(--accent); }
+a.client::after { content: '↗'; color: var(--faint); font-size: 11px; }
+
+/* Experience */
+.jobs { border-top: 1px solid var(--line); }
+.job { display: grid; grid-template-columns: 220px 1fr; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+@media (max-width: 700px) { .job { grid-template-columns: 1fr; gap: 8px; } }
+.job h3 { font: 600 16px/1.3 var(--sans); }
+.job .m { font: 12px/1.6 var(--sans); color: var(--faint); margin-top: 2px; }
+.wi + .wi { margin-top: 12px; }
+.wi h4 { font: 600 13px var(--sans); margin-bottom: 4px; }
+.wi li { font-size: 15px; color: var(--muted); line-height: 1.45; padding-left: 14px; position: relative; }
+.wi li + li { margin-top: 3px; }
+.wi li::before { content: ''; position: absolute; left: 0; top: .7em; width: 6px; height: 1px; background: var(--faint); }
+
+/* Research / edu */
+.small-k { font: 12px var(--sans); color: var(--faint); display: block; margin-bottom: 6px; }
+.certs { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.certs li { font: 12px var(--sans); color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; }
+
+/* Contact */
+.contact { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(20px, 4vw, 32px); }
+.contact h2 { font: 400 clamp(26px, 3.6vw, 38px)/1.15 var(--serif); max-width: 640px; }
+.contact p.s { color: var(--muted); margin: 8px 0 18px; font-size: 16px; }
+.cl { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.cl a { font: 500 13px var(--sans); text-decoration: none; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; background: var(--bg); transition: border-color .15s; }
+.cl a:hover { border-color: var(--faint); }
+.cl a span { color: var(--faint); margin-right: 6px; font-weight: 400; }
+
+/* Footer */
+footer { margin-top: var(--gap); border-top: 1px solid var(--line); padding: 24px 0 calc(24px + env(safe-area-inset-bottom, 0px)); font: 12px var(--sans); color: var(--faint); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+footer b { color: var(--text); letter-spacing: .12em; text-transform: uppercase; }
+.stmt { max-width: var(--max); margin: 0 auto 20px; padding: 0 var(--gut); font: 400 18px/1.4 var(--serif); color: var(--muted); }
+
+.rv { opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
+.rv.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
+  html { scroll-behavior: auto; }
+  .rv { opacity: 1; transform: none; }
+  * { transition: none !important; }
 }
-
-/* ==========================================================================
-   LAYOUT PRIMITIVES
-   ========================================================================== */
-.section-inner {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 28px;
-}
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.1rem);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  margin-bottom: 12px;
-}
-.section-lede {
-  color: var(--text-muted);
-  max-width: 62ch;
-  font-size: 1.01rem;
-  margin-bottom: 40px;
-}
-
-section { padding: 88px 0; border-top: 1px solid var(--border); }
-.hero { border-top: none; }
-
-@media (max-width: 480px) {
-  section { padding: 56px 0; }
-  .section-inner { padding: 0 18px; }
-}
-
-/* ==========================================================================
-   NAV
-   ========================================================================== */
-.site-nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  height: var(--nav-h);
-  display: flex;
-  align-items: center;
-  background: rgba(250, 249, 245, 0.88);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
-}
-.nav-inner {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  width: 100%;
-  padding: 0 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
-.nav-mark {
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 0.92rem;
-  letter-spacing: 0.02em;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.nav-mark-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-dim);
-}
-.nav-links {
-  display: flex;
-  gap: 28px;
-}
-.nav-links a {
-  font-size: 0.92rem;
-  color: var(--text-muted);
-  transition: color 0.15s ease;
-}
-.nav-links a:hover { color: var(--text); }
-.nav-cta {
-  font-size: 0.88rem;
-  font-family: var(--font-mono);
-  padding: 7px 14px;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-s);
-  transition: border-color 0.15s ease, color 0.15s ease;
-}
-.nav-cta:hover { border-color: var(--accent); color: var(--accent-strong); }
-
-@media (max-width: 720px) {
-  .nav-links { display: none; }
-}
-
-/* ==========================================================================
-   HERO
-   ========================================================================== */
-.hero-inner {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 64px 28px 56px;
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 40px;
-  align-items: center;
-}
-.hero-kicker {
-  font-family: var(--font-mono);
-  font-size: 0.86rem;
-  color: var(--accent-strong);
-  margin-bottom: 18px;
-}
-.hero-name {
-  font-family: var(--font-display);
-  font-size: clamp(2.3rem, 1.7rem + 2.6vw, 3.5rem);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.08;
-  margin-bottom: 18px;
-}
-.hero-desc {
-  color: var(--text-muted);
-  font-size: 1.08rem;
-  max-width: 46ch;
-  margin-bottom: 20px;
-}
-.hero-capabilities {
-  font-family: var(--font-mono);
-  font-size: 0.86rem;
-  color: var(--text-faint);
-  max-width: 48ch;
-  margin-bottom: 32px;
-  line-height: 1.7;
-}
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 11px 20px;
-  border-radius: var(--radius-s);
-  font-size: 0.94rem;
-  font-weight: 600;
-  border: 1px solid transparent;
-  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
-}
-.btn-primary {
-  background: var(--accent);
-  color: var(--text);
-}
-.btn-primary:hover { background: var(--accent-strong); }
-.btn-ghost {
-  border-color: var(--border-strong);
-  color: var(--text);
-}
-.btn-ghost:hover { border-color: var(--accent); color: var(--accent-strong); }
-
-/* ==========================================================================
-   HERO SCENE — a small story: apple falls on Newton, becomes a current
-   through a closed circuit, and lights a bulb on its way to Tesla's coil.
-   ========================================================================== */
-.hero-tree {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.hero-tree svg { width: 100%; height: auto; display: block; max-width: 460px; }
-
-.tree-canopy { fill: var(--cactus); }
-.tree-canopy--soft { opacity: 0.55; }
-.tree-trunk { fill: #9c7a54; }
-.tree-branch { stroke: #9c7a54; stroke-width: 6; stroke-linecap: round; fill: none; }
-.ground-line { stroke: var(--border-strong); stroke-width: 1.5; }
-
-.figure-body { fill: var(--accent-dim); stroke: var(--text-faint); stroke-width: 1.4; }
-.figure-head { fill: var(--surface); stroke: var(--text); stroke-width: 1.6; }
-.figure-limb { stroke: var(--text-faint); stroke-width: 2.2; stroke-linecap: round; fill: none; }
-.figure-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  fill: var(--text-faint);
-  text-anchor: middle;
-}
-
-/* the wire loop — a genuinely closed circuit */
-.circuit-wire {
-  stroke: var(--border-strong);
-  stroke-width: 3;
-  stroke-linejoin: round;
-  fill: none;
-}
-.lead-wire {
-  stroke: var(--border-strong);
-  stroke-width: 3;
-  stroke-linecap: round;
-}
-
-/* apple: falls from the branch, then hands off to the current */
-.apple {
-  fill: var(--accent);
-  animation: story-apple 7s ease-in-out infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-@keyframes story-apple {
-  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
-  34%  { transform: translateY(50px) rotate(130deg); opacity: 1; }
-  39%  { transform: translateY(50px) rotate(130deg); opacity: 1; }
-  41%  { opacity: 0; }
-  100% { transform: translateY(50px) rotate(130deg); opacity: 0; }
-}
-
-.impact-mark {
-  stroke: var(--accent-strong);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  opacity: 0;
-  animation: story-impact 7s ease-in-out infinite;
-}
-@keyframes story-impact {
-  0%, 38% { opacity: 0; }
-  42% { opacity: 1; }
-  50% { opacity: 0; }
-  100% { opacity: 0; }
-}
-
-/* electron: what the apple becomes once it reaches Newton */
-.electron {
-  fill: var(--sky);
-  filter: drop-shadow(0 0 3px var(--sky));
-  animation: story-electron 7s linear infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-@keyframes story-electron {
-  0%, 41%  { transform: translate(0, 0); opacity: 0; }
-  43%      { transform: translate(0, 0); opacity: 1; }
-  52%      { transform: translate(0, -120px); opacity: 1; }
-  64%      { transform: translate(90px, -120px); opacity: 1; }
-  74%      { transform: translate(180px, -120px); opacity: 1; }
-  85%      { transform: translate(180px, -40px); opacity: 1; }
-  90%      { transform: translate(180px, -40px); opacity: 0; }
-  100%     { transform: translate(180px, -40px); opacity: 0; }
-}
-.electron-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  fill: var(--sky);
-  opacity: 0;
-  animation: story-electron-label 7s ease-in-out infinite;
-}
-@keyframes story-electron-label {
-  0%, 41% { opacity: 0; transform: translateY(0); }
-  46% { opacity: 1; transform: translateY(-4px); }
-  56% { opacity: 0; transform: translateY(-10px); }
-  100% { opacity: 0; }
-}
-
-/* bulb: glows as the current passes through it */
-.bulb-halo {
-  fill: var(--sky);
-  animation: story-bulb-halo 7s ease-in-out infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-.bulb-filament {
-  stroke: var(--text-faint);
-  stroke-width: 1.3;
-  fill: none;
-  animation: story-bulb-filament 7s ease-in-out infinite;
-}
-@keyframes story-bulb-halo {
-  0%, 56% { opacity: 0; transform: scale(0.7); }
-  62% { opacity: 0.85; transform: scale(1.35); }
-  72% { opacity: 0.6; transform: scale(1.15); }
-  84%, 100% { opacity: 0; transform: scale(0.7); }
-}
-@keyframes story-bulb-filament {
-  0%, 56% { stroke: var(--text-faint); }
-  62%, 74% { stroke: var(--accent-strong); }
-  84%, 100% { stroke: var(--text-faint); }
-}
-
-/* Tesla coil: sparks when the current arrives */
-.tesla-spark {
-  stroke: var(--sky);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  opacity: 0;
-  animation: story-tesla 7s ease-in-out infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-@keyframes story-tesla {
-  0%, 82% { opacity: 0; transform: scale(0.85); }
-  87% { opacity: 1; transform: scale(1.15); }
-  95%, 100% { opacity: 0; transform: scale(0.85); }
-}
-
-.eq-float {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  fill: var(--accent-strong);
-  opacity: 0;
-  animation: eq-drift 5s ease-in infinite;
-}
-.eq-float--1 { animation-delay: 0s; }
-.eq-float--2 { animation-delay: 1.6s; }
-@keyframes eq-drift {
-  0%   { opacity: 0; transform: translateY(0); }
-  15%  { opacity: 1; }
-  80%  { opacity: 0.8; }
-  100% { opacity: 0; transform: translateY(-26px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .apple { animation: none; opacity: 0; }
-  .impact-mark { animation: none; opacity: 0; }
-  .electron, .electron-label { animation: none; opacity: 0; }
-  .bulb-halo { animation: none; opacity: 0.7; transform: scale(1.2); }
-  .bulb-filament { animation: none; stroke: var(--accent-strong); }
-  .tesla-spark { animation: none; opacity: 0.8; }
-  .eq-float { animation: none; opacity: 0.85; }
-}
-
-@media (max-width: 860px) {
-  .hero-inner { grid-template-columns: 1fr; padding-top: 48px; }
-  .hero-tree { order: -1; max-width: 340px; margin: 0 auto 8px; }
-}
-@media (max-width: 480px) {
-  .hero-tree svg { max-width: 300px; }
-}
-
-@media (max-width: 480px) {
-  .hero-inner { padding: 40px 18px 40px; }
-  .hero-actions { flex-direction: column; align-items: stretch; }
-  .hero-actions .btn { justify-content: center; }
-  .nav-inner { padding: 0 16px; }
-}
-
-/* ==========================================================================
-   APPROACH / FLOW
-   ========================================================================== */
-.flow {
-  display: flex;
-  overflow-x: auto;
-  gap: 0;
-  margin-top: 12px;
-  padding-bottom: 6px;
-  scrollbar-width: thin;
-}
-.flow-step {
-  flex: 1 0 200px;
-  position: relative;
-  padding: 20px 20px 0 0;
-  border-top: 1px solid var(--border-strong);
-}
-.flow-step:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: -1px;
-  right: 8px;
-  width: 6px;
-  height: 6px;
-  border-top: 1px solid var(--accent);
-  border-right: 1px solid var(--accent);
-  transform: rotate(45deg) translateY(-2px);
-}
-.flow-index {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--accent-strong);
-  display: block;
-  margin-bottom: 6px;
-}
-.flow-label {
-  font-weight: 700;
-  font-size: 1.02rem;
-  display: block;
-  margin-bottom: 8px;
-}
-.flow-step p {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  max-width: 24ch;
-}
-
-@media (max-width: 720px) {
-  .flow { flex-direction: column; }
-  .flow-step { border-top: none; border-left: 2px solid var(--border-strong); padding: 0 0 24px 18px; }
-  .flow-step:not(:last-child)::after { display: none; }
-}
-
-/* ==========================================================================
-   PROJECTS / SINGLE-PROJECT SHOWCASE
-   ========================================================================== */
-.showcase {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-m);
-  background: var(--surface);
-  overflow: hidden;
-}
-
-.showcase-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 22px;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface-2);
-}
-.showcase-count {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  letter-spacing: 0.02em;
-}
-.showcase-arrow {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid var(--border-strong);
-  background: var(--surface);
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
-}
-.showcase-arrow:hover { border-color: var(--accent); color: var(--accent-strong); }
-
-.showcase-panel {
-  padding: 40px;
-  display: grid;
-  grid-template-columns: 0.85fr 1.4fr;
-  gap: 44px;
-  animation: panel-in 0.3s ease;
-}
-@keyframes panel-in {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .showcase-panel { animation: none; }
-}
-
-.pd-icon {
-  width: 46px;
-  height: 46px;
-  border-radius: var(--radius-s);
-  background: var(--accent-dim);
-  color: var(--accent-strong);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-.pd-left .pd-num {
-  font-family: var(--font-mono);
-  color: var(--accent-strong);
-  font-size: 0.82rem;
-  display: block;
-  margin-bottom: 8px;
-}
-.pd-left h3 {
-  font-family: var(--font-display);
-  font-size: 1.7rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-.pd-left .pd-cat {
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  color: var(--text-muted);
-  margin-bottom: 20px;
-  display: block;
-}
-.pd-left .pd-thesis {
-  font-size: 0.98rem;
-  color: var(--text-muted);
-  border-left: 2px solid var(--accent-line);
-  padding-left: 14px;
-}
-
-.pd-block { margin-bottom: 26px; }
-.pd-block:last-child { margin-bottom: 0; }
-.pd-block h4 {
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  color: var(--text-faint);
-  margin-bottom: 8px;
-}
-.pd-block p { font-size: 0.96rem; color: var(--text); }
-
-.pd-arch {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-}
-.pd-arch-node {
-  padding: 6px 11px;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-s);
-  font-size: 0.78rem;
-  background: var(--surface-2);
-  white-space: nowrap;
-}
-.pd-arch-arrow {
-  color: var(--text-faint);
-  font-size: 0.85rem;
-}
-
-.pd-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.pd-focus {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.pd-focus li {
-  position: relative;
-  padding-left: 16px;
-  font-size: 0.94rem;
-  color: var(--text-muted);
-}
-.pd-focus li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-.showcase-dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  padding: 0 0 22px;
-}
-.showcase-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--border-strong);
-  border: none;
-  padding: 0;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-.showcase-dot.is-active {
-  background: var(--accent);
-  transform: scale(1.5);
-}
-
-@media (max-width: 860px) {
-  .showcase-panel { grid-template-columns: 1fr; padding: 28px 22px; gap: 26px; }
-}
-@media (max-width: 480px) {
-  .showcase-panel { padding: 22px 16px; }
-  .showcase-nav { padding: 14px 16px; }
-  .pd-arch-node { font-size: 0.72rem; padding: 5px 9px; }
-}
-
-/* ==========================================================================
-   TOOLKIT
-   ========================================================================== */
-.toolkit-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px 40px;
-}
-.toolkit-group {
-  border-left: 2px solid var(--border-strong);
-  padding-left: 18px;
-}
-.toolkit-group h3 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 14px;
-}
-.pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
-.pill {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  padding: 6px 11px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-s);
-  color: var(--text-muted);
-  background: var(--surface);
-}
-
-@media (max-width: 720px) {
-  .toolkit-grid { grid-template-columns: 1fr; }
-}
-
-/* ==========================================================================
-   EXPERIENCE / TIMELINE
-   ========================================================================== */
-.timeline {
-  position: relative;
-  padding-left: 26px;
-  border-left: 1px solid var(--border-strong);
-}
-.timeline-item { position: relative; padding-bottom: 34px; }
-.timeline-item:last-child { padding-bottom: 0; }
-.timeline-dot {
-  position: absolute;
-  left: -30px;
-  top: 4px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--bg);
-  border: 2px solid var(--accent);
-}
-.timeline-content h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
-.timeline-role {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--accent-strong);
-  margin-bottom: 6px;
-}
-.timeline-content p:last-child { color: var(--text-muted); font-size: 0.94rem; max-width: 60ch; }
-
-/* ==========================================================================
-   CONTACT
-   ========================================================================== */
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-.contact-item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 18px 0 0;
-  border-top: 1px solid var(--border);
-}
-.contact-label {
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  color: var(--text-faint);
-}
-.contact-item a:hover { color: var(--accent-strong); }
-
-@media (max-width: 720px) {
-  .contact-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 480px) {
-  .contact-grid { grid-template-columns: 1fr; }
-}
-
-/* ==========================================================================
-   FOOTER
-   ========================================================================== */
-.site-footer {
-  border-top: 1px solid var(--border);
-  padding: 40px 0 28px;
-}
-.footer-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 24px;
-}
-.footer-name { font-weight: 700; }
-.footer-role { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
-.footer-links { display: flex; gap: 20px; }
-.footer-links a { font-size: 0.9rem; color: var(--text-muted); }
-.footer-links a:hover { color: var(--accent-strong); }
-.footer-note {
-  font-size: 0.82rem;
-  color: var(--text-faint);
-  font-style: italic;
-}
-
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<!-- ============ NAV ============ -->
-<header class="site-nav">
-  <div class="nav-inner">
-    <a href="#top" class="nav-mark" aria-label="Top of page">
-      <span class="nav-mark-dot" aria-hidden="true"></span>
-      RitendraKumar G
-    </a>
-    <nav aria-label="Primary">
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#toolkit">Toolkit</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-    <a class="nav-cta" href="https://github.com/riustark" target="_blank" rel="noopener">
-      GitHub
-    </a>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">R. Guntreddi</a>
+    <div class="nav-right">
+      <nav aria-label="Primary">
+        <div class="links" id="links">
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#products">Products</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+      <button class="icon-btn" id="theme" aria-label="Switch to light theme" title="Toggle theme">◐</button>
+      <a class="btn" href="#contact">Let's Talk</a>
+      <button class="icon-btn" id="menuBtn" aria-expanded="false" aria-controls="links" aria-label="Open menu"><i></i></button>
+    </div>
   </div>
 </header>
 
-<main id="top">
-
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="hero">
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <p class="hero-kicker">AI Engineer · Product Builder</p>
-        <h1 class="hero-name">Ritendra Kumar G</h1>
-        <p class="hero-desc">
-          I design and build production-oriented AI applications, agentic systems,
-          RAG platforms, developer tools, and customer-facing products.
-        </p>
-        <p class="hero-capabilities">
-          AI Systems · Agentic AI · RAG · Python · FastAPI · TypeScript · APIs · Product Engineering
-        </p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">View projects</a>
-          <a href="https://github.com/riustark" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
-          <a href="https://ritustark.github.io/ritendrame/" target="_blank" rel="noopener" class="btn btn-ghost">Portfolio</a>
+<main id="main">
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-row">
+        <h1>I build AI systems that become <em>products.</em></h1>
+        <div>
+          <p class="lead">AI Engineer working across LLM agents, RAG, MCP, backend and SaaS. I build from idea to deployed product.</p>
+          <div class="cta">
+            <a class="btn" href="#work">View My Work</a>
+            <a class="btn ghost" href="#contact">Let's Talk</a>
+          </div>
         </div>
       </div>
-
-      <div class="hero-tree" aria-hidden="true">
-        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-          <!-- ground -->
-          <line class="ground-line" x1="15" y1="248" x2="385" y2="248" />
-
-          <!-- tree canopy -->
-          <circle class="tree-canopy tree-canopy--soft" cx="105" cy="98" r="40" />
-          <circle class="tree-canopy tree-canopy--soft" cx="197" cy="92" r="44" />
-          <circle class="tree-canopy" cx="150" cy="76" r="56" />
-
-          <!-- trunk + branch the apple falls from -->
-          <rect class="tree-trunk" x="138" y="118" width="22" height="92" rx="6" />
-          <path class="tree-branch" d="M143 128 Q100 120 65 138" />
-
-          <!-- falling apple -->
-          <circle class="apple" cx="65" cy="140" r="7" />
-
-          <!-- impact burst where the apple lands on Newton -->
-          <g class="impact-mark">
-            <line x1="51" y1="196" x2="43" y2="188" />
-            <line x1="79" y1="196" x2="87" y2="188" />
-            <line x1="65" y1="188" x2="65" y2="178" />
-          </g>
-
-          <!-- Newton -->
-          <g>
-            <line class="figure-limb" x1="55" y1="245" x2="55" y2="225" />
-            <line class="figure-limb" x1="75" y1="245" x2="75" y2="225" />
-            <line class="figure-limb" x1="53" y1="210" x2="37" y2="196" />
-            <line class="figure-limb" x1="78" y1="212" x2="95" y2="215" />
-            <rect class="figure-body" x="52" y="203" width="26" height="38" rx="10" />
-            <circle class="figure-head" cx="65" cy="190" r="12" />
-            <text class="figure-label" x="65" y="262">Newton</text>
-          </g>
-          <text class="eq-float eq-float--1" x="18" y="176">F = ma</text>
-          <text class="eq-float eq-float--2" x="83" y="164">9.8 m/s&#178;</text>
-
-          <!-- the closed circuit: Newton's hand to Tesla's coil, bulb in series -->
-          <path class="lead-wire" d="M95 215 L110 215" />
-          <path class="circuit-wire" d="M110 215 L110 95 L290 95 L290 175" />
-          <path class="circuit-wire" d="M110 215 L110 225 L290 225 L290 175" />
-          <path class="lead-wire" d="M290 175 L320 175" />
-
-          <!-- bulb, mounted in the top wire -->
-          <circle class="bulb-halo" cx="200" cy="95" r="13" />
-          <circle cx="200" cy="95" r="9" fill="var(--surface)" stroke="var(--text-faint)" stroke-width="1.4" />
-          <path class="bulb-filament" d="M195 99 L200 90 L205 99" />
-          <rect x="196" y="103" width="8" height="5" rx="1" fill="var(--text-faint)" />
-
-          <!-- the electron the apple became -->
-          <circle class="electron" cx="110" cy="215" r="4" />
-          <text class="electron-label" x="118" y="230">e&#8315;</text>
-
-          <!-- Tesla coil -->
-          <line x1="320" y1="225" x2="320" y2="150" stroke="var(--text-faint)" stroke-width="4" stroke-linecap="round" />
-          <ellipse cx="320" cy="143" rx="16" ry="7" fill="var(--surface-2)" stroke="var(--text-faint)" stroke-width="1.4" />
-          <g class="tesla-spark">
-            <line x1="320" y1="132" x2="320" y2="120" />
-            <line x1="308" y1="136" x2="296" y2="126" />
-            <line x1="332" y1="136" x2="344" y2="126" />
-          </g>
-
-          <!-- Tesla -->
-          <g>
-            <line class="figure-limb" x1="345" y1="245" x2="345" y2="225" />
-            <line class="figure-limb" x1="365" y1="245" x2="365" y2="225" />
-            <line class="figure-limb" x1="342" y1="212" x2="325" y2="205" />
-            <rect class="figure-body" x="342" y="203" width="26" height="38" rx="10" />
-            <circle class="figure-head" cx="355" cy="190" r="12" />
-            <text class="figure-label" x="355" y="262">Tesla</text>
-          </g>
-        </svg>
+      <div class="facts">
+        <span>Bengaluru, India</span>
+        <span>2+ years engineering experience</span>
+        <span>AI products shipped</span>
+        <span>B2B SaaS in development</span>
       </div>
     </div>
   </section>
 
-  <!-- ============ ABOUT / APPROACH ============ -->
-  <section class="approach" id="about">
-    <div class="section-inner">
-      <h2 class="section-title">From problem to production</h2>
-      <p class="section-lede">
-        The work behind every project on this page follows the same loop: understand what a
-        person or system actually needs, design an architecture that fits, build the APIs
-        and backend that carry it, connect it to real tools and workflows, evaluate what
-        comes out, and iterate on what's wrong.
-      </p>
-
-      <ol class="flow" aria-label="Engineering process">
-        <li class="flow-step"><span class="flow-index">01</span><span class="flow-label">Understand</span><p>Get to the real problem behind the request, not just the stated one.</p></li>
-        <li class="flow-step"><span class="flow-index">02</span><span class="flow-label">Design</span><p>Sketch a system architecture that fits the constraints, not a generic template.</p></li>
-        <li class="flow-step"><span class="flow-index">03</span><span class="flow-label">Build</span><p>Ship the APIs and backend services the system runs on.</p></li>
-        <li class="flow-step"><span class="flow-index">04</span><span class="flow-label">Integrate</span><p>Wire AI models and tools into real workflows people already use.</p></li>
-        <li class="flow-step"><span class="flow-index">05</span><span class="flow-label">Evaluate</span><p>Check what the system actually outputs against what it should.</p></li>
-        <li class="flow-step"><span class="flow-index">06</span><span class="flow-label">Iterate</span><p>Fix what real usage reveals, then repeat the loop.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ============ FLAGSHIP PROJECTS ============ -->
-  <section class="projects" id="projects">
-    <div class="section-inner">
-      <h2 class="section-title">Flagship projects</h2>
-      <p class="section-lede">Six systems, end to end. Step through them one at a time.</p>
-
-      <div class="showcase" id="showcase" tabindex="0" aria-label="Flagship projects" aria-live="polite">
-        <div class="showcase-nav">
-          <button class="showcase-arrow" id="carPrev" aria-label="Previous project">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <span class="showcase-count" id="showcaseCount"></span>
-          <button class="showcase-arrow" id="carNext" aria-label="Next project">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-          </button>
+  <section id="about">
+    <div class="wrap">
+      <div class="about">
+        <div>
+          <span class="label">About</span>
+          <h2 class="h">I like building where AI meets real workflows.</h2>
         </div>
-
-        <div class="showcase-panel" id="showcasePanel"></div>
-
-        <div class="showcase-dots" id="carDots" role="tablist" aria-label="Select project"></div>
+        <div>
+          <p>I work between AI engineering and product development: LLMs, agents, retrieval, APIs and automation, turned into products people can use.</p>
+          <p>Past work spans commerce, restaurant ordering, healthcare decision support, developer tooling, context optimization and communication infrastructure.</p>
+        </div>
+      </div>
+      <div class="g3 pillars">
+        <article class="card"><h3>AI Engineering</h3><p>LLM apps, agentic workflows, RAG, MCP, inference, evaluation.</p></article>
+        <article class="card"><h3>Product Building</h3><p>Architecture, backend, interfaces, deployment, iteration.</p></article>
+        <article class="card"><h3>Systems Thinking</h3><p>Context, orchestration, reliability, observability and UX.</p></article>
+      </div>
+      <div class="stack" aria-label="Technology">
+        <div><h4>AI</h4><p>Generative AI, Agentic AI, LangGraph, LangChain, MCP, RAG, Hybrid Retrieval, Prompt Engineering, OpenAI API, Azure OpenAI, Gemini, Groq, FAISS</p></div>
+        <div><h4>Backend</h4><p>Python, FastAPI, REST APIs, Microservices, PostgreSQL, MySQL, Redis, SQL, Supabase</p></div>
+        <div><h4>Cloud / Engineering</h4><p>AWS, GCP, Docker, CI/CD, Git, Azure DevOps, OpenTelemetry, pytest</p></div>
+        <div><h4>Frontend</h4><p>HTML, CSS, JavaScript, React, Next.js</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ============ TOOLKIT ============ -->
-  <section class="toolkit" id="toolkit">
-    <div class="section-inner">
-      <h2 class="section-title">Engineering toolkit</h2>
+  <section id="work">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">Selected work</span>
+        <h2 class="h">Products, AI systems, and infrastructure I've built.</h2>
+      </div>
+      <div class="g3" id="projects"></div>
+    </div>
+  </section>
 
-      <div class="toolkit-grid">
-        <div class="toolkit-group">
-          <h3>AI / GenAI</h3>
-          <div class="pill-row">
-            <span class="pill">RAG</span><span class="pill">Agentic AI</span><span class="pill">LangGraph</span>
-            <span class="pill">LLM integration</span><span class="pill">Prompt engineering</span><span class="pill">Embeddings</span>
-            <span class="pill">Vector search</span><span class="pill">Retrieval</span><span class="pill">Evaluation</span><span class="pill">Tool calling</span>
+  <section id="products">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">B2B SaaS &amp; live apps</span>
+        <h2 class="h">Communication infrastructure and commerce.</h2>
+      </div>
+      <div class="two">
+        <article class="card rv">
+          <div class="meta"><span>B2B SaaS / CPaaS</span><span class="status dep">Under deployment</span></div>
+          <h3 style="font-size:18px">2Way</h3>
+          <p class="tagline">Communications infrastructure for the apps that move the real world.</p>
+          <p>An in-app calling SaaS on an RTC network for on-demand platforms: food and grocery delivery, ride-hailing, e-commerce, service marketplaces.</p>
+          <div class="flow" role="img" aria-label="Customer App to 2Way RTC Network to Delivery, Driver or Partner App">
+            <span class="node">Customer App</span><span class="arr" aria-hidden="true">→</span>
+            <span class="node core">2Way RTC Network</span><span class="arr" aria-hidden="true">→</span>
+            <span class="node">Delivery / Driver / Partner App</span>
           </div>
-        </div>
-        <div class="toolkit-group">
-          <h3>Backend</h3>
-          <div class="pill-row">
-            <span class="pill">Python</span><span class="pill">FastAPI</span><span class="pill">REST APIs</span>
-            <span class="pill">API integrations</span><span class="pill">Auth / authz</span><span class="pill">PostgreSQL</span>
-            <span class="pill">Supabase</span><span class="pill">Qdrant</span>
-          </div>
-        </div>
-        <div class="toolkit-group">
-          <h3>Product engineering</h3>
-          <div class="pill-row">
-            <span class="pill">MVP development</span><span class="pill">System architecture</span>
-            <span class="pill">Customer-facing apps</span><span class="pill">Internal tools</span>
-            <span class="pill">API-first systems</span><span class="pill">Workflow automation</span>
-          </div>
-        </div>
-        <div class="toolkit-group">
-          <h3>Frontend</h3>
-          <div class="pill-row">
-            <span class="pill">TypeScript</span><span class="pill">JavaScript</span><span class="pill">HTML</span>
-            <span class="pill">CSS</span><span class="pill">React fundamentals</span>
-          </div>
-        </div>
-        <div class="toolkit-group">
-          <h3>Developer / cloud</h3>
-          <div class="pill-row">
-            <span class="pill">Git</span><span class="pill">GitHub</span><span class="pill">Docker</span>
-            <span class="pill">Linux</span><span class="pill">Deployment workflows</span>
-          </div>
-        </div>
+          <p class="sdk">API + Headless SDK + UI SDK</p>
+        </article>
+        <article class="card rv proj">
+          <div class="meta"><span>Commerce Platform</span><span class="status live">Live</span></div>
+          <h3 style="font-size:18px">Lookartz App</h3>
+          <p class="d">Product discovery, sellers, and online selling workflows. A product I helped build as part of the broader Lookartz platform.</p>
+          <a class="go ul" href="https://app.lookartz.com" target="_blank" rel="noopener noreferrer">Open App →</a>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ============ EXPERIENCE ============ -->
-  <section class="experience">
-    <div class="section-inner">
-      <h2 class="section-title">Experience</h2>
-      <ul class="timeline">
-        <li class="timeline-item">
-          <span class="timeline-dot" aria-hidden="true"></span>
-          <div class="timeline-content">
-            <h3>Software engineering</h3>
-            <p class="timeline-role">Software Engineer, CGI</p>
-            <p>Foundation in software engineering practice and delivery.</p>
+  <section id="clients">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">Clients served</span>
+        <h2 class="h">Software and digital systems for teams across industries.</h2>
+      </div>
+      <div class="clients" id="clientList"></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">Experience</span>
+        <h2 class="h">Where I've shipped.</h2>
+      </div>
+      <div class="jobs">
+        <article class="job">
+          <div><h3>AI Engineer (Part time)</h3><p class="m">Evolsyn Software Solutions LLP · Bengaluru<br>Aug 2025 – Present</p></div>
+          <div>
+            <div class="wi"><h4>LOOKartz — AI commerce search &amp; routing</h4>
+              <ul>
+                <li>LangGraph multi-agent workflow for intent, routing, filters, retrieval, ranking and grounded responses.</li>
+                <li>Taxonomy-driven hybrid RAG with a validation layer that rechecks IDs, prices and stock to stop hallucinated listings.</li>
+                <li>FastAPI AI services with Redis session state, retries, fallbacks and metrics for latency, cost and hallucination.</li>
+              </ul></div>
+            <div class="wi"><h4>QuickPlate — AI restaurant ordering</h4>
+              <ul><li>End-to-end platform with FastAPI, PostgreSQL, Supabase, React and LLM chatbot workflows.</li></ul></div>
+            <div class="wi"><h4>SFRD — rare disease diagnosis support</h4>
+              <ul><li>RAG pipelines and LLM clinical summaries on secure FastAPI/PostgreSQL microservices, deployed on AWS with Docker.</li></ul></div>
           </div>
-        </li>
-        <li class="timeline-item">
-          <span class="timeline-dot" aria-hidden="true"></span>
-          <div class="timeline-content">
-            <h3>AI / product engineering</h3>
-            <p class="timeline-role">RAG systems · agentic workflows · commerce systems · communication platforms · internal enterprise assistants</p>
-            <p>Building AI products end to end, from architecture through integration.</p>
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="timeline-dot" aria-hidden="true"></span>
-          <div class="timeline-content">
-            <h3>Founder / product builder</h3>
-            <p class="timeline-role">Idea → architecture → implementation → iteration</p>
-            <p>Taking products the whole way from a working idea to a working system.</p>
-          </div>
-        </li>
+        </article>
+        <article class="job">
+          <div><h3>Software Engineer</h3><p class="m">CGI · Bengaluru<br>Aug 2024 – Aug 2025</p></div>
+          <div class="wi"><ul>
+            <li>LLM test automation assistant (Python, FastAPI, LangChain, Azure OpenAI) generating API test scenarios and edge cases from OpenAPI specs.</li>
+            <li>Validated data integrity in a large enterprise content migration, triaged defects and supported releases.</li>
+          </ul></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">Research &amp; education</span>
+      </div>
+      <div class="g2">
+        <article class="card">
+          <span class="small-k">MDPI Engineering Proceedings, Vol. 66, Aug 2024</span>
+          <h3>Automated Water-Jet Robot for PV Panel Cleaning Using an Arduino-Assisted HC-05 Bluetooth Module</h3>
+          <p style="margin-top:6px">Control routines and autonomous trajectory algorithms for a PV panel cleaning rover with sensor-driven movement and wireless teleoperation.</p>
+        </article>
+        <article class="card">
+          <span class="small-k">Education</span>
+          <h3>B.Tech in Computer Engineering</h3>
+          <p>Vignan's Institute of Information Technology</p>
+          <p style="margin-top:6px;font:13px var(--sans);color:var(--faint)">CGPA 8.00 · Graduated May 2024</p>
+        </article>
+      </div>
+      <ul class="certs" aria-label="Certifications">
+        <li>Software Engineering — Commonwealth Bank</li>
+        <li>Software Engineering — Goldman Sachs</li>
+        <li>Quantitative Research — JPMorgan Chase</li>
+        <li>Solidity — Infosys Springboard</li>
+        <li>Networking — Cisco</li>
+        <li>Python — Udemy</li>
       </ul>
     </div>
   </section>
 
-  <!-- ============ CONTACT ============ -->
-  <section class="contact" id="contact">
-    <div class="section-inner">
-      <h2 class="section-title">Contact</h2>
-      <div class="contact-grid">
-        <div class="contact-item">
-          <span class="contact-label">Email</span>
-          <a href="mailto:ritendrakumarguntreddi@gmail.com">ritendrakumarguntreddi@gmail.com</a>
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <span class="label">Contact</span>
+        <h2>Have a product, AI workflow, or system worth building?</h2>
+        <p class="s">Open to AI engineering roles, product collaborations, and B2B software conversations.</p>
+        <div class="cl">
+          <a href="mailto:ritendraguntreddi@gmail.com"><span>Email</span>ritendraguntreddi@gmail.com</a>
+          <a href="https://wa.me/919704839545" target="_blank" rel="noopener noreferrer"><span>WhatsApp</span>+91 9704839545</a>
+          <a href="https://linkedin.com/in/ritendrakumar" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span>linkedin.com/in/ritendrakumar</a>
+          <a href="https://github.com/riustark" target="_blank" rel="noopener noreferrer"><span>GitHub</span>github.com/riustark</a>
         </div>
-        <div class="contact-item">
-          <span class="contact-label">Phone</span>
-          <a href="tel:+919704839545">+91 9704839545</a>
-        </div>
-        <div class="contact-item">
-          <span class="contact-label">Location</span>
-          <span>Visakhapatnam, India</span>
-        </div>
-        <div class="contact-item">
-          <span class="contact-label">GitHub</span>
-          <a href="https://github.com/riustark" target="_blank" rel="noopener">github.com/Rituearth</a>
-        </div>
+        <a class="btn clay" href="mailto:ritendraguntreddi@gmail.com">Start a conversation →</a>
       </div>
     </div>
   </section>
-
 </main>
 
-<footer class="site-footer">
-  <div class="section-inner footer-inner">
-    <div>
-      <p class="footer-name">Ritendra Kumar G</p>
-      <p class="footer-role">AI Engineer · Product Builder</p>
-    </div>
-    <div class="footer-links">
-      <a href="https://github.com/riustark" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://ritustark.github.io/ritendrame/" target="_blank" rel="noopener">Portfolio</a>
-      <a href="mailto:ritendrakumarguntreddi@gmail.com">Email</a>
-    </div>
+<footer>
+  <p class="stmt">I build AI systems, software products, and infrastructure for real-world workflows.</p>
+  <div class="wrap">
+    <b>Ritendrakumar Guntreddi</b>
+    <span>AI Engineer · Product Builder</span>
+    <span>© 2026 Ritendrakumar Guntreddi · Built with HTML, CSS &amp; JavaScript.</span>
   </div>
-  <p class="footer-note section-inner">Built with curiosity, engineering, and a bias toward shipping.</p>
 </footer>
 
 <script>
-/* ==========================================================================
-   ICONS — small inline SVG glyphs, one per project, drawn in the same
-   line/node style as the architecture diagrams.
-   ========================================================================== */
-const ICONS = {
-  callbridge: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0 8 7 15 15 15l2-4-5-2-2 2c-2-1-4-3-5-5l2-2-2-5-4 1Z"/><path d="M14 3c2.5 0 4.5 2 4.5 4.5"/><path d="M14 6c1 0 1.8.8 1.8 1.8"/></svg>`,
-  lookartz: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M7 12h6M13 12l4-5M13 12l4 5"/></svg>`,
-  revai: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 3 12l6 6"/><path d="M15 6l6 6-6 6"/></svg>`,
-  auxiliator: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3.5v5c0 5-3.4 8.6-8 9.5-4.6-.9-8-4.5-8-9.5v-5L12 3Z"/><path d="M9 12.5l2 2 4-4.5"/></svg>`,
-  quickplate: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.4"/></svg>`,
-  couponloop: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5 12 3l8 5.5v5L12 19l-8-5.5v-5Z"/><circle cx="12" cy="11" r="1.6" fill="currentColor" stroke="none"/></svg>`,
-};
-
-/* ==========================================================================
-   PROJECT DATA — single source of truth. Edit here to update the page.
-   ========================================================================== */
-const PROJECTS = [
-  {
-    id: "lookartz",
-    number: "01",
-    title: "Lookartz Commerce Router",
-    category: "Agentic AI · Commerce · LangGraph",
-    thesis: "An AI interface that knows who's asking, what they can do, and which tool should act.",
-    problem: "Conversational commerce tools often stop at answering questions. Admins and customers need different permissions and different actions, and a single assistant has to route both correctly.",
-    solution: "Lookartz uses LangGraph-based agent orchestration to route requests according to the requester's role and permissions, then connects the right agent to the right tools so it can execute — not just describe — commerce operations.",
-    architecture: ["User/Admin", "AI Router", "Role/Access", "Specialized Agent", "Tools/APIs", "Commerce Action"],
-    stack: ["Python", "LangGraph", "Agentic AI", "APIs", "Tool calling", "Access control"],
-    focus: [
-      "Built role-aware routing between user and administrator requests",
-      "Orchestrated specialized agents with LangGraph",
-      "Connected agents to tools so they can execute commerce actions, not just answer",
-    ],
-  },
-  {
-    id: "callbridge",
-    number: "02",
-    title: "CallBridge",
-    category: "Real-time Communication · Voice AI",
-    thesis: "Communication built as an application-level service, not a bolted-on feature.",
-    problem: "Applications that need calling usually treat it as an isolated, third-party feature bolted on afterward — and users speaking different languages have no way to talk naturally on a call.",
-    solution: "CallBridge exposes real-time, in-app calling through a clean set of APIs so calling behaves like any other core capability. The second version added in-call voice translation, letting participants speaking different languages communicate more naturally without leaving the call.",
-    architecture: ["Caller", "Agora RTC", "Translation Layer", "Callee"],
-    stack: ["Agora RTC", "TypeScript", "Real-time communication", "APIs", "Voice translation"],
-    focus: [
-      "Designed calling as an application-level service, not an isolated widget",
-      "Built the API surface that exposes calling capability to the rest of the app",
-      "Added a live voice-translation layer inside an active call",
-    ],
-  },
-  {
-    id: "revai",
-    number: "03",
-    title: "REV-AI",
-    category: "RAG · Developer Tools · Code Intelligence",
-    thesis: "Make a repository queryable in natural language while preserving code context.",
-    problem: "Keyword and code search answer 'where is this string' but not 'how does this feature actually work' or 'what would break if I changed this'.",
-    solution: "REV-AI parses a repository into structure-aware chunks, embeds them, and retrieves relevant context for an LLM to answer questions like where a function lives, how a feature works, or where to make a change — grounded in the actual codebase.",
-    architecture: ["Repository", "Parser", "Structure-aware Chunks", "Embeddings", "Qdrant", "Retriever", "LLM", "Answer"],
-    stack: ["Python", "FastAPI", "Qdrant", "Sentence Transformers", "Gemini", "GitHub APIs", "RAG"],
-    focus: [
-      "Built structure-aware chunking that preserves code context",
-      "Stood up embedding + vector retrieval over an entire repository",
-      "Connected retrieval to an LLM to answer natural-language codebase questions",
-    ],
-  },
-  {
-    id: "auxiliator",
-    number: "04",
-    title: "Auxiliator AI",
-    category: "Enterprise AI · RAG · Internal Assistant",
-    thesis: "Turn scattered internal documentation into an accessible AI knowledge interface.",
-    problem: "Company knowledge — HR policy, leave policy, engineering architecture, deployment details — is usually scattered across documents no one can search well.",
-    solution: "Auxiliator AI acts as an internal information layer: it retrieves relevant policy and knowledge-base content and gives employees context-aware answers, suggestions, and guidance based on what's actually documented.",
-    architecture: ["Employee", "AI Assistant", "Retriever", "Company Knowledge", "LLM", "Context-aware Answer"],
-    stack: ["Python", "FastAPI", "RAG", "Qdrant", "Embeddings", "LLMs", "Enterprise knowledge base"],
-    focus: [
-      "Indexed HR, leave, manager, and engineering policy content for retrieval",
-      "Built a RAG pipeline that grounds answers in existing documentation",
-      "Scoped the assistant to information and guidance, not autonomous decisions",
-    ],
-  },
-  {
-    id: "quickplate",
-    number: "05",
-    title: "QuickPlate AI",
-    category: "Restaurant AI · Conversational Ordering · Product AI",
-    thesis: "Make restaurant ordering faster, more conversational, and more useful.",
-    problem: "A static QR menu still leaves customers to do all the work of deciding — scanning, scrolling, and guessing what pairs well with what.",
-    solution: "QuickPlate AI replaces the static menu with a conversational ordering layer that understands a customer's request, helps them navigate choices, and offers contextual recommendations while they order.",
-    architecture: ["Customer", "Conversational AI", "Menu Context", "Recommendation", "Order"],
-    stack: ["AI agents", "Conversational AI", "APIs", "Restaurant integrations", "Recommendation workflows"],
-    focus: [
-      "Designed a conversational layer to replace static menu browsing",
-      "Built contextual recommendation into the ordering flow itself",
-      "Focused the product on reducing ordering friction, not adding a chat gimmick",
-    ],
-  },
-  {
-    id: "couponloop",
-    number: "06",
-    title: "CouponLoop",
-    category: "Marketplace · Commerce · Product Engineering",
-    thesis: "A trustworthy, searchable layer for discovering and eventually transacting around coupons.",
-    problem: "Coupon discovery is fragmented across sites with no reliable way to search, and no path toward users trading unused coupons directly.",
-    solution: "CouponLoop started as a search and discovery tool for coupons, then extended toward a marketplace model where users could potentially buy and sell coupons directly.",
-    architecture: ["User Query", "Search Index", "Postgres/Supabase", "Marketplace Listings", "Result"],
-    stack: ["Web application", "Search", "Supabase", "PostgreSQL", "Marketplace workflows", "Data ingestion"],
-    focus: [
-      "Built search and discovery over ingested coupon data",
-      "Modeled a marketplace direction on top of the discovery layer",
-      "Used Supabase/PostgreSQL as the system of record",
-    ],
-  },
+/* ---------- Data (edit here) ---------- */
+const projects = [
+  { title: "QuickPlate / OrderIQ", category: "AI Restaurant Ordering", status: "Live", s: "live",
+    description: "AI ordering layer so customers order in natural language instead of rigid menus.",
+    tags: ["FastAPI", "PostgreSQL", "Supabase", "React", "LLM chat"],
+    url: "http://Orderiq.evolsy.com", cta: "Open OrderIQ →" },
+  { title: "OpenAI Context OS", category: "LLM Infrastructure", status: "Deployed", s: "dep",
+    description: "API-first LLM runtime for context management, compression and adaptive inference.",
+    tags: ["Token cost control", "Prompt compiler", "OpenTelemetry", "Next.js"],
+    url: "https://context-os-0t94.onrender.com", cta: "Explore Context OS →" },
+  { title: "Repilot MCP", category: "MCP / Developer Infra", status: "Deployed", s: "dep",
+    description: "MCP server linking LLM clients to GitHub to investigate CI failures, PRs and commits.",
+    tags: ["10-tool catalog", "Human approval", "Audit trail", "Chrome extension"],
+    url: "https://repilot-xm3g.onrender.com", cta: "Open Repilot →" },
+  { title: "Rev-AI", category: "AI / Open Source", status: "Open source", s: "oss",
+    description: "AI retrieval and application experiment for a practical LLM-backed developer system.",
+    tags: ["Retrieval", "LLM"],
+    url: "https://github.com/riustark/rev-ai", cta: "View GitHub →" },
+  { title: "Auxiliator", category: "AI / Open Source", status: "Open source", s: "oss",
+    description: "AI backend built around retrieval and developer-focused workflows.",
+    tags: ["Retrieval", "Backend"],
+    url: "https://github.com/riustark/auxiliator", cta: "View GitHub →" },
+  { title: "HR Intelligence System", category: "AI Agent / HR SaaS", status: "Private", s: "priv",
+    description: "Personalized HR intelligence built on agentic workflows, deployed as a service.",
+    tags: ["Agentic workflows"],
+    url: null, cta: "Private Deployment" }
 ];
 
-/* ==========================================================================
-   RENDER: single-project showcase
-   ========================================================================== */
-const panel = document.getElementById("showcasePanel");
-const dotsWrap = document.getElementById("carDots");
-const countLabel = document.getElementById("showcaseCount");
-const showcase = document.getElementById("showcase");
+const clients = [
+  { name: "Lookartz.com" }, { name: "InternForage.com" }, { name: "Evolsyn.com" },
+  { name: "Senorita's Sports Bar", url: "https://www.senoritassportsbar.com/" },
+  { name: "Sri Sowjanya Hospitals", url: "https://srisowjanyahospitalsppm.org" },
+  { name: "Maahi Edible Oils", url: "https://maahiedibleoils.com" },
+  { name: "AI.Evolsyn.com", url: "https://ai.evolsyn.com" },
+  { name: "Korambil Sanmax", url: "https://Korambilsanmax.com" },
+  { name: "Varun Autism Reach Society", url: "https://Varunautismreachsociety.org" }
+];
 
-let activeIndex = 0;
+/* ---------- Render ---------- */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-function renderDots() {
-  dotsWrap.innerHTML = PROJECTS.map((_, i) => `
-    <button class="showcase-dot${i === activeIndex ? " is-active" : ""}"
-            role="tab"
-            aria-selected="${i === activeIndex}"
-            aria-label="Show project ${i + 1}: ${PROJECTS[i].title}"
-            data-index="${i}"></button>
-  `).join("");
+document.getElementById('projects').innerHTML = projects.map(p => `
+  <article class="card proj rv">
+    <div class="meta"><span>${esc(p.category)}</span><span class="status ${p.s}">${esc(p.status)}</span></div>
+    <h3>${esc(p.title)}</h3>
+    <p class="d">${esc(p.description)}</p>
+    <ul class="chips">${p.tags.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
+    ${p.url
+      ? `<a class="go ul" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(p.cta)}</a>`
+      : `<span class="go mute">${esc(p.cta)}</span>`}
+  </article>`).join('');
 
-  dotsWrap.querySelectorAll(".showcase-dot").forEach((dot) => {
-    dot.addEventListener("click", () => setActive(Number(dot.dataset.index)));
-  });
+document.getElementById('clientList').innerHTML = clients.map(c =>
+  c.url ? `<a class="client" href="${esc(c.url)}" target="_blank" rel="noopener noreferrer">${esc(c.name)}</a>`
+        : `<span class="client">${esc(c.name)}</span>`).join('');
+
+/* ---------- Theme toggle ---------- */
+const root = document.documentElement, themeBtn = document.getElementById('theme');
+function applyTheme(t) {
+  root.dataset.theme = t;
+  themeBtn.setAttribute('aria-label', t === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
 }
-
-function renderPanel() {
-  const p = PROJECTS[activeIndex];
-  countLabel.textContent = `${p.number} / ${String(PROJECTS.length).padStart(2, "0")}`;
-
-  const archHtml = p.architecture
-    .map((node) => `<span class="pd-arch-node">${node}</span>`)
-    .join('<span class="pd-arch-arrow">&rarr;</span>');
-  const stackHtml = p.stack.map((s) => `<span class="pill">${s}</span>`).join("");
-  const focusHtml = p.focus.map((f) => `<li>${f}</li>`).join("");
-
-  panel.innerHTML = `
-    <div class="pd-left">
-      <span class="pd-icon">${ICONS[p.id] || ""}</span>
-      <span class="pd-num">${p.number} / ${String(PROJECTS.length).padStart(2, "0")}</span>
-      <h3>${p.title}</h3>
-      <span class="pd-cat">${p.category}</span>
-      <p class="pd-thesis">${p.thesis}</p>
-    </div>
-    <div class="pd-right">
-      <div class="pd-block">
-        <h4>Problem</h4>
-        <p>${p.problem}</p>
-      </div>
-      <div class="pd-block">
-        <h4>Solution</h4>
-        <p>${p.solution}</p>
-      </div>
-      <div class="pd-block">
-        <h4>Architecture</h4>
-        <div class="pd-arch">${archHtml}</div>
-      </div>
-      <div class="pd-block">
-        <h4>Stack</h4>
-        <div class="pd-stack">${stackHtml}</div>
-      </div>
-      <div class="pd-block">
-        <h4>Engineering focus</h4>
-        <ul class="pd-focus">${focusHtml}</ul>
-      </div>
-    </div>
-  `;
-}
-
-function setActive(index) {
-  activeIndex = ((index % PROJECTS.length) + PROJECTS.length) % PROJECTS.length;
-  renderPanel();
-  renderDots();
-}
-
-document.getElementById("carPrev").addEventListener("click", () => setActive(activeIndex - 1));
-document.getElementById("carNext").addEventListener("click", () => setActive(activeIndex + 1));
-
-/* keyboard navigation on the showcase */
-showcase.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight") { e.preventDefault(); setActive(activeIndex + 1); }
-  if (e.key === "ArrowLeft") { e.preventDefault(); setActive(activeIndex - 1); }
+try { const saved = localStorage.getItem('theme'); if (saved) applyTheme(saved); } catch (e) {}
+themeBtn.addEventListener('click', () => {
+  const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
 });
 
-setActive(0);
+/* ---------- Mobile menu ---------- */
+const menuBtn = document.getElementById('menuBtn'), links = document.getElementById('links');
+function setMenu(open) {
+  links.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+}
+menuBtn.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
+links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { setMenu(false); menuBtn.focus(); } });
 
-/* ==========================================================================
-   NAV: smooth-scroll (progressive enhancement over CSS scroll-behavior)
-   ========================================================================== */
-document.querySelectorAll('.nav-links a[href^="#"]').forEach((link) => {
-  link.addEventListener("click", (e) => {
-    const target = document.querySelector(link.getAttribute("href"));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  });
-});
+/* ---------- Nav border on scroll ---------- */
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
+/* ---------- Active section ---------- */
+const map = { about: 'about', work: 'work', products: 'products', clients: 'products', experience: 'experience', research: 'experience', contact: 'contact' };
+const navA = [...links.querySelectorAll('a')];
+const spy = new IntersectionObserver(es => es.forEach(en => {
+  if (!en.isIntersecting) return;
+  const t = '#' + map[en.target.id];
+  navA.forEach(a => { const on = a.getAttribute('href') === t; a.classList.toggle('active', on); on ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'); });
+}), { rootMargin: '-40% 0px -55% 0px' });
+Object.keys(map).forEach(id => spy.observe(document.getElementById(id)));
+
+/* ---------- Reveal ---------- */
+const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: 0.1 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
